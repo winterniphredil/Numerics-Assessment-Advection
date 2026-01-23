@@ -79,25 +79,26 @@ def tvd(phi, c):
     return None
 
 
-def A_matrix(nx, c):
-    A = np.diag(np.array([1+c*c/2.]*nx))
+def A_matrix(nx):
+    A = np.zeros((nx,nx))
     for i in range(nx):
-        A[i,(i-1)%(nx)] = - c/4. * (1+c)
-        A[i,(i+1)%(nx)] = c/4. * (1-c)
+        A[i,(i-2)%(nx)] = 1/6.
+        A[i,(i-1)%(nx)] = -1.
+        A[i,(i)%(nx)] = 1/2.
+        A[i,(i+1)%(nx)] = 1/3.
     return A
 
 def B_matrix(nx, c):
-    B = np.diag(np.array([1-c*c/2.]*nx))
-    for i in range(nx):
-        B[i,(i-1)%(nx)] = c/4. * (c+1)
-        B[i,(i+1)%(nx)] = c/4. * (c-1)
-    return B
+    return np.identity(nx) + c/2. * A_matrix(nx)
+
+def C_matrix(nx, c):
+    return np.identity(nx) - c/2. * A_matrix(nx)
 
 
-def lax_wendroff_cn(phi, c):
+def implicit(phi, c):
     '''
     Author: Hannah
-    Solves the linear advection equation for one time step using a Lax-Wendorff scheme with Crank-Nicolson in time 
+    Solves the linear advection equation for one time step using a Crank-Nicolson in time scheme with cubic interpolation
     phi is updated. Nothing is returned
     Parameters:
         phi ([1darray]): A list length one containing a 1darray which is the
@@ -115,10 +116,10 @@ def lax_wendroff_cn(phi, c):
     # Update phi for all points
     nx = len(phiOld)
     
-    A = A_matrix(nx, c)
     B = B_matrix(nx, c)
+    C = C_matrix(nx, c)
     
-    phiNew = np.linalg.solve(A, B @ phiOld)
+    phiNew = np.linalg.solve(B, C @ phiOld)
     
     phi[1] = phiNew
     # Remove the old value of phi

@@ -237,10 +237,14 @@ def tv_test(x):
     
 schemes = [FTBS, CTCS, FTCS]
 
-schemes_new = [semi_lagrangian, tvd, lax_wendroff_cn]
+schemes_new = [semi_lagrangian, tvd, implicit]
 
-#growingErrors(cosBell_0_05, schemes_new, "basicSchemesCosMass.jpg", nx = 80, nt = 100, u = 1, endTime = 1)
+#(cosBell_0_05, schemes_new, "basicSchemesCosMass.jpg", nx = 80, nt = 100, u = 1, endTime = 1)
 
-#plot_tvd(tv_test, schemes_new, "tv_nx_80_nt_160.jpg", nx = 80, nt = 160, u = 1, endTime = 1)
+#plot_tvd(sqWave_0_05, schemes_new, "tv_nx_80_nt_160.jpg", nx = 80, nt = 160, u = 1, endTime = 1)
 
-plot_inc_c(cosBell_0_05, schemes_new, "_courant.jpg", start_nx = 60, nt = 100, endTime = 1)
+plot_tvd(sqWave_0_05, schemes, "tv_nx_80_nt_160_basic.jpg", nx = 80, nt = 160, u = 1, endTime = 1)
+
+#plot_inc_c(cosBell_0_05, schemes, "_courant.jpg", start_nx = 60, nt = 100, endTime = 1)
+
+#plot_mass_error(sqWave_0_05, schemes_new, "mass_test.jpg", nx = 60, nt = 100, endTime = 1)

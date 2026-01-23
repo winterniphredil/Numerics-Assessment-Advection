@@ -92,9 +92,9 @@ def tv_test(x):
 
 # List of functions to do the advection
 schemes = [FTBS, CTCS, FTCS]
-schemes_new = [semi_lagrangian, tvd, lax_wendroff_cn]
+schemes_new = [semi_lagrangian, tvd, implicit]
 
 #compareSchemeSnapshots(cosBell_0_05, schemes_new, "newSchemesCosBell.jpg", nx = 40, nt = 20, u = 1, endTime = 0.2, xLim = [0,1])
 #compareSchemeSnapshots(sqWave_0_05, schemes_new, "newSchemesSqWave.jpg", nx = 40, nt = 20, u = 1, endTime = 0.2, xLim = [0,1])
-#compareSchemeSnapshots(mass_test, schemes, "mass_test_nx_80_nt_167_profiles.jpg", nx = 80, nt = 167, u = 1, endTime = 1)
-compareSchemeSnapshots(tv_test, schemes_new, "tv_nx_80_nt_160_profiles.jpg", nx = 80, nt = 160, u = 1, endTime = 1)
+#compareSchemeSnapshots(mass_test, schemes_new, "mass_test_nx_80_nt_167_profiles.jpg", nx = 80, nt = 167, u = 1, endTime = 1)
+#compareSchemeSnapshots(sqWave_0_05, schemes_new, "tv_nx_80_nt_160_profiles.jpg", nx = 80, nt = 160, u = 1, endTime = 1)
